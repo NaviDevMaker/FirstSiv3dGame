@@ -4,23 +4,26 @@
 class Cheese
 {
 public:
-	Cheese(const Emoji emoji,int point,int scale,Vec2 spawnPos)
+	Cheese(const Emoji emoji,int point,double scale,Vec2 spawnPos)
 		: looks{ Texture{emoji} }
+		,cheeseCircle{spawnPos,looks.width() * scale / 2}
 	{
 		this->point = point;
 		this->scale = scale;
 		this->spawnPos = spawnPos;
 	}
-
-	void CheeseMovement();
+	void Update();
+	int point{ 0 };
 private:
 	Vec2 spawnPos;
 	Texture looks;
-	int point{ 0 };
-	int scale{ 0 };
+	double scale{ 0 };
 	double angle{ 0 };
-	const double rotateAmount{5};
+	double rotateAmount{5};
 	void RotateCheese();
 	void Draw() const;
+public://順番依存だから
+	Circle cheeseCircle;
+	
 	//なんかfriendってやつもあるらしい,これの場合同じファイル内ならアクセスできるやつかな？
 };

@@ -1,18 +1,19 @@
 ﻿# include <Siv3D.hpp> // Siv3D v0.6.16
-# include "PlayerController.hpp"
-# include "ItemSpawner.hpp"
+#include "GameManager.hpp"
+#include "DebugLogClass.hpp"
 
+//なぜ前方宣言の場合は実体を作れないのか
+//A :実体のサイズがわからないから、だから逆にポインターや参照はサイズが固定（8バイトとか）でサイズを知る必要がないから、T&　や　T* ができる
 void Main()
 {
-	Scene::Resize(1920,1080);
-	PlayerController player{ U"😺"_emoji };
-	ItemManager itemManager;
+	Scene::Resize(1920, 1080);
+	Window::Resize(1280, 720);
+	GameManager gameManager;
+	Effect effect;
 	while (System::Update())
 	{
-		itemManager.SpawnItems();
-		itemManager.MoveItems();
-		player.Update();
-		player.Draw();
+		gameManager.Update(effect);
+		effect.update();
 	}
 }
 

@@ -148,6 +148,39 @@
     <Filter Include="Source Files\Player">
       <UniqueIdentifier>{8cb8b538-da71-4259-9400-6fb365f0c348}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{d5a8ff3e-6656-4310-b0a7-a231e365e3cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Enemy">
+      <UniqueIdentifier>{845de5b6-b342-4842-8fb3-d2a7c27e1877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager">
+      <UniqueIdentifier>{8240dc88-4750-432f-a1a8-71359fd94188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager">
+      <UniqueIdentifier>{c734f7b2-032b-41bc-bf57-cffa6fcf3887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Environment">
+      <UniqueIdentifier>{69f66fcf-31c6-4bcf-b264-2a55d128f221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Environment">
+      <UniqueIdentifier>{20769470-ba14-4399-9d95-0eae5a37285c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player\Belonging">
+      <UniqueIdentifier>{1621ac8f-4d6a-48d7-ae27-e6d79d091afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player\Belonging">
+      <UniqueIdentifier>{e8ecf275-0cd8-4375-8393-7bd5dd6f0f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player\Belonging\CaptureItem">
+      <UniqueIdentifier>{4f70d21a-1f66-42d1-a0b1-ef3cca91540e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Effect">
+      <UniqueIdentifier>{f1973848-1ec0-47de-800a-d1d5ffd25bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Effect">
+      <UniqueIdentifier>{37e82545-8e57-436f-9ced-d42c912213d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -159,14 +192,65 @@
     <ClCompile Include="Cheese.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemSpawner.cpp">
-      <Filter>Source Files\Item</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="HitDetecter.cpp">
       <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreController.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="AstarPathFinding.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="HpUIManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugLogClass.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CaptureMouthItem.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SetEnvironment.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatusManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlacementInventory.cpp">
+      <Filter>Source Files\Player\Belonging</Filter>
+    </ClCompile>
+    <ClCompile Include="CaptureItemData.cpp">
+      <Filter>Source Files\Player\Belonging</Filter>
+    </ClCompile>
+    <ClCompile Include="CaptureItemData.hpp">
+      <Filter>Header Files\Player\Belonging\CaptureItem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaceCaptureItem.cpp">
+      <Filter>Source Files\Player\Belonging</Filter>
+    </ClCompile>
+    <ClCompile Include="PlacementItemManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlacementUIManager.hpp">
+      <Filter>Header Files\Player\Belonging</Filter>
+    </ClCompile>
+    <ClCompile Include="PlacementUIManager.cpp">
+      <Filter>Source Files\Player\Belonging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,14 +920,59 @@
     <ClInclude Include="Cheese.hpp">
       <Filter>Header Files\Item</Filter>
     </ClInclude>
-    <ClInclude Include="ItemSpawner.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.hpp">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreController.hpp">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.hpp">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.hpp">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AstarPathFinding.hpp">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.hpp">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
     <ClInclude Include="HitDetecter.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HpUIManager.hpp">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptureMouthItem.hpp">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SetEnvironment.hpp">
+      <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatusManager.hpp">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlacementInventory.hpp">
+      <Filter>Header Files\Player\Belonging</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaceCaptureItem.hpp">
+      <Filter>Header Files\Player\Belonging\CaptureItem</Filter>
+    </ClInclude>
+    <ClInclude Include="PlacementItemManager.hpp">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptureEffect.hpp">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHitEffect.hpp">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemGetEffect.hpp">
+      <Filter>Header Files\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

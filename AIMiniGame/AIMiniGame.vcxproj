@@ -115,11 +115,30 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AstarPathFinding.cpp" />
+    <ClCompile Include="PlacementInventory.cpp" />
+    <ClCompile Include="CaptureItemData.hpp" />
+    <ClCompile Include="CaptureItemData.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CaptureMouthItem.cpp" />
     <ClCompile Include="Cheese.cpp" />
+    <ClCompile Include="DebugLogClass.hpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HitDetecter.cpp" />
-    <ClCompile Include="ItemSpawner.cpp" />
+    <ClCompile Include="HpUIManager.cpp" />
+    <ClCompile Include="PlacementItemManager.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlaceCaptureItem.cpp" />
+    <ClCompile Include="PlacementUIManager.cpp" />
+    <ClCompile Include="PlacementUIManager.hpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerStatusManager.cpp" />
+    <ClCompile Include="ScoreController.cpp" />
+    <ClCompile Include="SetEnvironment.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -329,10 +348,25 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AstarPathFinding.hpp" />
+    <ClInclude Include="CaptureEffect.hpp" />
+    <ClInclude Include="EnemyHitEffect.hpp" />
+    <ClInclude Include="ItemGetEffect.hpp" />
+    <ClInclude Include="PlacementInventory.hpp" />
+    <ClInclude Include="CaptureMouthItem.hpp" />
     <ClInclude Include="Cheese.hpp" />
+    <ClInclude Include="Enemy.hpp" />
+    <ClInclude Include="EnemyManager.hpp" />
+    <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="HitDetecter.hpp" />
-    <ClInclude Include="ItemSpawner.hpp" />
+    <ClInclude Include="HpUIManager.hpp" />
+    <ClInclude Include="PlacementItemManager.hpp" />
+    <ClInclude Include="ItemManager.hpp" />
+    <ClInclude Include="PlaceCaptureItem.hpp" />
     <ClInclude Include="PlayerController.hpp" />
+    <ClInclude Include="PlayerStatusManager.hpp" />
+    <ClInclude Include="ScoreController.hpp" />
+    <ClInclude Include="SetEnvironment.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

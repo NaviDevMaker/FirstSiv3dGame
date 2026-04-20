@@ -7,11 +7,12 @@ void Cheese::RotateCheese()
 
 void Cheese::Draw()const
 {
+	cheeseCircle.draw(ColorF{ 1,0,0 });
 	looks.scaled(scale).rotated(angle).drawAt(spawnPos);
 }
 
 //Updateの中でやるやつ
-void Cheese::CheeseMovement()
+void Cheese::Update()
 {
 	RotateCheese();
 	Draw();
