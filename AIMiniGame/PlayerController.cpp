@@ -1,11 +1,13 @@
 ﻿#include "PlayerController.hpp"
+#include "PlayerHitEffect.hpp"
+#include "InputUtility.hpp"
 
 void PlayerController::UpdatePlayerLooks()
 {
-	if (KeyA.pressed()) pos.x -= speed * Scene::DeltaTime();
-	else if (KeyD.pressed()) pos.x += speed * Scene::DeltaTime();
-	else if (KeyW.pressed()) pos.y -= speed * Scene::DeltaTime();
-	else if (KeyS.pressed()) pos.y += speed * Scene::DeltaTime();
+	if (InputUtility::IsMoveLeft()) pos.x -= speed * Scene::DeltaTime();
+	else if (InputUtility::IsMoveRight()) pos.x += speed * Scene::DeltaTime();
+	else if (InputUtility::IsMoveUp()) pos.y -= speed * Scene::DeltaTime();
+	else if (InputUtility::IsMoveDown()) pos.y += speed * Scene::DeltaTime();
 
 	Draw();
 }
@@ -13,14 +15,33 @@ void PlayerController::UpdatePlayerLooks()
 void PlayerController::UpdateHp()
 {
 	hp--;
+	if (hp <= 0)
+	{
+		OnPlayerDead.Invoke();
+	}
+}
+
+void PlayerController::Reset()
+{
+	ResetPlayerStatus();
+	scoreController.Reset();
+	placementItemManager.Reset();
+}
+
+void PlayerController::ResetPlayerStatus()
+{
+	hp = initialHp;
+	playerStatusManager.Reset();
+	blinkElapsedTime = 0;
+	pos = Vec2{ 0,0 };
 }
 
 void PlayerController:: Update(Array<Cheese>& cheeses, Array<Enemy>& enemys,Array<CaptureMouthItem>& captureItems
 							  ,Effect& effect)
 {
-	HandleEnemyCollision(enemys);
+	HandleEnemyCollision(enemys,effect);
 	HandleCheeseCollision(cheeses,effect);
-	HandleCaptureItemCollision(captureItems);
+	HandleCaptureItemCollision(captureItems,effect);
 
 	hit.draw(ColorF{ 1,0,0 });
 	UpdatePlayerLooks();
@@ -53,19 +74,20 @@ void PlayerController::HandleCheeseCollision(Array<Cheese>& cheeses,Effect& effe
 	}
 }
 
-void PlayerController::HandleEnemyCollision(Array<Enemy>& enemys)
+void PlayerController::HandleEnemyCollision(Array<Enemy>& enemys,Effect& effect)
 {
 	if (hitDetecter.DetectHitEnemy(enemys) && !playerStatusManager.GetActiveStatus(StatusType::Invincible))
 	{
 		UpdateHp();
+		effect.add<PlayerHitEffect>(*this);
 		playerStatusManager.ActivateFlag(StatusType::Invincible);
 	}
 	hpUIManager.Update();
 }
 
-void PlayerController::HandleCaptureItemCollision(Array<CaptureMouthItem>& captureItems)
+void PlayerController::HandleCaptureItemCollision(Array<CaptureMouthItem>& captureItems,Effect& effect)
 {
-	if(hitDetecter.DetectHitCaptureitem(captureItems))
+	if(hitDetecter.DetectHitCaptureitem(captureItems,effect))
 	{
 		placementItemManager.AddCaptureItem();
 	}

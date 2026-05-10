@@ -1,7 +1,7 @@
 ﻿#include "ScoreController.hpp"
 
 
-void ScoreController::UpdateScore(int cheesePoint)
+void ScoreController::UpdateScore(int32 cheesePoint)
 {
 	score += cheesePoint;
 	/*Print << score;*/
@@ -16,4 +16,9 @@ void ScoreController::DrawScoreText() const
 void ScoreController::Update()
 {
 	DrawScoreText();
+}
+
+void ScoreController::Reset()
+{
+	score = 0;
 }

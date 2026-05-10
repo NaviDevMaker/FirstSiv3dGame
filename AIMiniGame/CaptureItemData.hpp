@@ -9,6 +9,7 @@ public:
   void  ReduceItemCount(int32 amount = 1);
   bool  IsUsable() const;
   int32 GetCaptureItemCount() const { return captureItemCount; }
+  void Reset();
 private:
 	int32 captureItemCount{0};
 	

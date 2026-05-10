@@ -40,3 +40,14 @@ void PlayerStatusManager::Update()
 {
 	CountDownStatus();
 }
+
+void PlayerStatusManager::Reset()
+{
+	for (std::pair<const StatusType, Status>& pair : statusMap)
+	{
+		auto& type = pair.first;
+		auto& status = pair.second;
+		status.elapsedTime = 0;
+		DeactivateFlag(type);
+	}
+}

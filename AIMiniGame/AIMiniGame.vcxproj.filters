@@ -181,6 +181,24 @@
     <Filter Include="Source Files\Effect">
       <UniqueIdentifier>{37e82545-8e57-436f-9ced-d42c912213d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Function">
+      <UniqueIdentifier>{f20ebb35-3d5e-4ff2-a687-613c911567d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Result">
+      <UniqueIdentifier>{a25d0ffd-a462-4238-bf6c-61059433bb06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Result">
+      <UniqueIdentifier>{2cba31a9-fe17-479d-9dba-3acc42a52ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enum">
+      <UniqueIdentifier>{2a317395-4f4a-42f8-8988-e6f5e0ff77f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stage">
+      <UniqueIdentifier>{ecbee436-c721-4777-85c5-74bf15c20cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stage">
+      <UniqueIdentifier>{f0b3b708-527b-466a-bd71-d29b39cd9bfc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -251,6 +269,18 @@
     </ClCompile>
     <ClCompile Include="PlacementUIManager.cpp">
       <Filter>Source Files\Player\Belonging</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleResultController.cpp">
+      <Filter>Source Files\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultUIManager.cpp">
+      <Filter>Source Files\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageData.cpp">
+      <Filter>Source Files\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -968,11 +998,38 @@
     <ClInclude Include="CaptureEffect.hpp">
       <Filter>Header Files\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyHitEffect.hpp">
+    <ClInclude Include="PlayerHitEffect.hpp">
       <Filter>Header Files\Effect</Filter>
     </ClInclude>
     <ClInclude Include="ItemGetEffect.hpp">
       <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Siv3dEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleResultController.hpp">
+      <Filter>Header Files\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultUIManager.hpp">
+      <Filter>Header Files\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.hpp">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StageData.hpp">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyType.hpp">
+      <Filter>Header Files\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleState.hpp">
+      <Filter>Header Files\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StageEnemyInfo.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

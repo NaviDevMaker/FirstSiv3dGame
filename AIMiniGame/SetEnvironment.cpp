@@ -1,11 +1,30 @@
 ﻿#include "SetEnvironment.hpp"
 
-void SetEnvironment::Draw() const
+void SetEnvironment::Draw(BattleState currentBattleState, ResultType resultType)
 {
-	background.resized(Scene::Size()).draw();
+	
+	switch (currentBattleState)
+	{
+	    case BattleState::Wait:
+			wait.resized(Scene::Size()).draw();
+			break;
+		case BattleState::Battle:
+			battle.resized(Scene::Size()).draw();
+			break;
+		case BattleState::Result:
+			if (resultType == ResultType::GameOver) gameOver.resized(Scene::Size()).draw();
+			else if (resultType == ResultType::StageClear) stageClear.resized(Scene::Size()).draw();
+			break;
+	}	
 }
 
-void SetEnvironment::Update()
+void SetEnvironment::Update(BattleState currentBattleState, ResultType resultType)
 {
-	Draw();
+	Draw(currentBattleState,resultType);
+}
+
+//Battle画面のTextuteの設定
+void SetEnvironment::ApplyStageInfo(const Texture& battleTexture)
+{
+	battle = battleTexture;
 }

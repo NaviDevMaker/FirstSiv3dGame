@@ -2,18 +2,18 @@
 
 
 //std::unique_ptrの場合は自動で解放してくれる、Node* のようにすると自分で delete n のようにしないといけない
-
-
-
-
-
 //startからgoalまでの最短距離をVec2の配列で返す
-Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
+Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal, bool isDiagonal)
 {
 	//スタートとゴールの要素をintにキャストしてPointにする
 	//A*としてグリッドっぽく扱いたいから
 	Point startP = ToGrid(start);// { static_cast<int32>(start.x), static_cast<int32>(start.y) };
 	Point goalP = ToGrid(goal); //{ static_cast<int32>(goal.x), static_cast<int32>(goal.y) };
+
+	if (!IsInsideGrid(startP) || !IsInsideGrid(goalP))
+	{
+		return {};
+	}
 
 	//生成した Node を全部ここで管理する
 	Array<std::unique_ptr<Node>> allNodes;
@@ -41,7 +41,12 @@ Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
 		Node* current = openSet[0];
 		for (auto* node : openSet)
 		{
+			if (node == nullptr) continue;
 			if (node->fCost() < current->fCost()) current = node;
+		}
+		if (current == nullptr)
+		{
+			return {};
 		}
 		//上記for文が終わった時、最もfCostが低いものがcurrentに入っている状態
 		//currentがgoalだった場合、goal地点からparentをたどる、parentのparentをたどる...を繰り返し、traceの親がnullptr = startになるまで続ける
@@ -65,8 +70,13 @@ Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
 		 //closed = 調査済みの配列に格納
 		openSet.remove(current);
 		closedSet << current;
-		for (const auto& neighborPos : GetNeighbors(current->gridPos))
+		for (const auto& neighborPos : GetNeighbors(current->gridPos,isDiagonal))
 		{
+			if (!IsInsideGrid(neighborPos))
+			{
+				continue;
+			}
+
 			//既に調査済み = closedのなかのNode nのgridPos　がneighborPos(currentを起点に隣接するNode)だった場合そこはスキップ
 			if (closedSet.contains_if([&](const Node* n) {return n->gridPos == neighborPos; }))
 			{
@@ -74,8 +84,12 @@ Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
 			}
 			Node* existing = nullptr;
 			//そのNodeに行った場合の仮定のgCost
-			//隣接なのでcurrentのgCost + 1
-			double tentativeG = current->gCost + 1;
+			//隣接方向で移動コストを切り替える（縦横:1, 斜め:√2）
+			const int32 dx = Abs(neighborPos.x - current->gridPos.x);
+			const int32 dy = Abs(neighborPos.y - current->gridPos.y);
+			//斜めの場合（ｘ、ｙが共にcurrentのx,yではない場合 = 差が共に1）√2をxurrentのgCostの追加
+			const double stepCost = (dx == 1 && dy == 1) ? Math::Sqrt2 : 1.0;
+			double tentativeG = current->gCost + stepCost;
 			//隣接するNodeが既にopenに入っているかの確認
 			//入っている場合は、existingにそのNodeのポインターを入れる
 			for (auto* node : openSet)
@@ -104,15 +118,7 @@ Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
 				existing->gCost = tentativeG;
 				existing->parent = current;
 			}
-		}
-
-			
-
-
-			
-			
-
-
+		}	
 			//OpenSetにない場合新しく追加する
 			//
 				//位置を追加
@@ -131,14 +137,29 @@ Array<Vec2> AstarPathFinding::FindPath(const Vec2& start, const Vec2& goal)
 
 }
 
-Array<Point> AstarPathFinding::GetNeighbors(const Point& point) const
+Array<Point> AstarPathFinding::GetNeighbors(const Point& point, bool isDiagonal) const
 {
+	if (!isDiagonal)
+	{
+		return
+		{
+		   {point.x + 1,point.y},
+		   {point.x - 1,point.y},
+		   {point.x,point.y + 1},
+		   {point.x,point.y - 1}
+		};
+	}
 	return
 	{
-	   {point.x + 1,point.y},
-	  {point.x - 1,point.y},
-		{point.x,point.y + 1},
-		{point.x,point.y - 1}
+		{point.x + 1, point.y},
+		{point.x - 1, point.y},
+		{point.x, point.y + 1},
+		{point.x, point.y - 1},
+		//斜めのPoint
+		{point.x + 1, point.y + 1},
+		{point.x + 1, point.y - 1},
+		{point.x - 1, point.y + 1},
+		{point.x - 1, point.y - 1}
 	};
 }
 
@@ -159,4 +180,13 @@ Vec2 AstarPathFinding::ToWorld(const Point& grid) const
 {
 	//中心座標に合わせる
 	return Vec2{ grid.x * 32 + 16,grid.y * 32 + 16 };
+}
+
+bool AstarPathFinding::IsInsideGrid(const Point& grid) const
+{
+	const int32 width = Scene::Width() / 32;
+	const int32 height = Scene::Height() / 32;
+
+	return InRange(grid.x, 0, width - 1)
+		&& InRange(grid.y, 0, height - 1);
 }

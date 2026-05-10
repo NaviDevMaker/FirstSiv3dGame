@@ -4,10 +4,12 @@
 class ScoreController
 {
 public:
-	void UpdateScore(int cheesePoint);
+	void UpdateScore(int32 cheesePoint);
 	void Update();
+	int32 GetCurrentScore() { return score; };
+	void Reset();
 private:
 	void DrawScoreText() const;
-	int score{ 0 };
+	int32 score{ 0 };
 	Font font{ 80 };
 };

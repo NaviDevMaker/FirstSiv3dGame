@@ -9,6 +9,8 @@
 #include "HpUIManager.hpp"
 #include "PlayerStatusManager.hpp"
 #include "PlacementItemManager.hpp"
+#include "Siv3dEvent.hpp"
+#include <functional>
 
 class Cheese;
 class CaptureMouthItem;
@@ -31,6 +33,13 @@ public:
 	void Update(Array<Cheese>& cheeses,Array<Enemy>& enemys,Array<CaptureMouthItem>& captureItems
 				,Effect& effect);
 	Circle hit;
+	void RegisterOnDead(const std::function<void()>& function)
+	{
+		OnPlayerDead.Add(function);
+	};
+
+	void Reset();
+	int32 GetCurrentScore() { return scoreController.GetCurrentScore();};
 private:
 	ScoreController scoreController;
 	HitDetecter hitDetecter;
@@ -43,9 +52,13 @@ private:
 	void Draw();
 	void BlinkDraw();
 	void HandleCheeseCollision(Array<Cheese>& cheeses,Effect& effect);
-	void HandleEnemyCollision(Array<Enemy>& enemys);
-	void HandleCaptureItemCollision(Array<CaptureMouthItem>& captureItems);
-	int hp{ 5 };
+	void HandleEnemyCollision(Array<Enemy>& enemys, Effect& effect);
+	void HandleCaptureItemCollision(Array<CaptureMouthItem>& captureItems,Effect& effect);
+	void ResetPlayerStatus();
+	static constexpr int32 initialHp{ 5 };
+	int hp{ initialHp };
 	static constexpr double blinkDuration{ 0.05 };
 	double blinkElapsedTime{ 0 };
+	//UnityAction(delegate)のC++版
+	Siv3dEvent OnPlayerDead;
 };

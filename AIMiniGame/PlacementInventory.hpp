@@ -12,6 +12,7 @@ public:
 	void AddCaptureItem(int32 amount = 1);
 	void ReduceCaptureItem(int32 amount = 1);
 	int32 GetCaptureItemCount() const;
+	void Reset();
 private:
 	CaptureItemData captureItemData;
 };

@@ -2,13 +2,15 @@
 #include "DebugLogClass.hpp"
 #include "PlayerController.hpp"
 
-Enemy::Enemy(int32 speed, ColorF colorF, Vec2 spawnPos, PlayerController& player)
+Enemy::Enemy(int32 speed, ColorF colorF, Vec2 spawnPos, PlayerController& player
+			, bool isDiagonal)
 	:speed{ speed }
 	, colorF{ colorF }
 	, looks{ Texture{U"🐀"_emoji} }
 	, pos{ spawnPos }
 	, hit{ spawnPos,looks.width() / 2 }
 	, player{ player }
+	,isDiagonal{isDiagonal}
 	//, previousPos{ player.pos }//ポジション触るからinclude必要
 {
 
@@ -22,20 +24,24 @@ void Enemy::Update()
 
 void Enemy::UpdatePosition(Vec2& nor)
 {
-	elapsedTime += Scene::DeltaTime();
-	if (elapsedTime < chaseTime) return;
-	//isDrawable = true;
-	elapsedTime = 0;
-	
-	path = astar.FindPath(pos, player.get().pos);
-	pathIndex = 0;
+	const double deltaTime = Scene::DeltaTime();
+	pathElapsedTime += deltaTime;
+
+	if (path.isEmpty() || pathElapsedTime >= pathRefreshInterval)
+	{
+		pathElapsedTime = 0;
+		path = astar.FindPath(pos, player.get().pos,isDiagonal);
+		pathIndex = 0;
+	}
+
 	//Print << U"Start" << path.size();
 	if (pathIndex >= path.size()) return;
 	Vec2 target = path[pathIndex];
 	double length = (target - pos).length();
 	if (length < 0.0001) return;
 	nor = (target - pos).normalize();
-	if (length <= 0.1)
+	const double moveDistance = speed * deltaTime;
+	if (length <= moveDistance)
 	{
 		pos = target;
 		pathIndex++;
@@ -43,7 +49,7 @@ void Enemy::UpdatePosition(Vec2& nor)
 	else
 	{
 		//Print << nor;
-		pos += nor * speed * Scene::DeltaTime();
+		pos += nor * moveDistance;
 	}
 }
 

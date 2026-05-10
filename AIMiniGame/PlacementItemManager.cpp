@@ -1,10 +1,11 @@
 ﻿#include "PlacementItemManager.hpp"
 #include "PlayerController.hpp"
 #include "DebugLogClass.hpp"
+#include "InputUtility.hpp"
 //生成されたアイテムのUpdate毎の処理
 void PlacementItemManager::Update(Array<Enemy>& enemys,Effect& effect)
 {
-	if(KeyU.up()) TryPlaceCaptureItem();
+	if(InputUtility::IsUseCaptureItem()) TryPlaceCaptureItem();
 	HandlePlacedCaptureItem(enemys, effect);
 	DrawUI();
 }
@@ -55,4 +56,9 @@ void PlacementItemManager::HandlePlacedCaptureItem(Array<Enemy>& enemys,Effect& 
 		placedCaptureItem.Update(enemys, effect);
 		if (placedCaptureItem.IsUsed()) placedCaptureItems.remove_at(i);
 	}
+}
+
+void PlacementItemManager::Reset()
+{
+	placementInventory.Reset();
 }

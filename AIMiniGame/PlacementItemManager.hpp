@@ -17,6 +17,7 @@ public:
 	}
 	void Update(Array<Enemy>& enemys,Effect& effect);
 	void AddCaptureItem();
+	void Reset();
 private:
 	Array<PlaceCaptureItem> placedCaptureItems;
 	PlayerController& player;//この存在は確定だから参照でいい

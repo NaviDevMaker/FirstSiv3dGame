@@ -116,29 +116,37 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AstarPathFinding.cpp" />
+    <ClCompile Include="BattleResultController.cpp" />
+    <ClCompile Include="HelperUIManager.cpp" />
     <ClCompile Include="PlacementInventory.cpp" />
-    <ClCompile Include="CaptureItemData.hpp" />
     <ClCompile Include="CaptureItemData.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CaptureMouthItem.cpp" />
     <ClCompile Include="Cheese.cpp" />
-    <ClCompile Include="DebugLogClass.hpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HitDetecter.cpp" />
     <ClCompile Include="HpUIManager.cpp" />
+    <ClCompile Include="InputUtility.cpp" />
     <ClCompile Include="PlacementItemManager.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlaceCaptureItem.cpp" />
-    <ClCompile Include="PlacementUIManager.cpp" />
-    <ClCompile Include="PlacementUIManager.hpp" />
+    <ClCompile Include="PlacementUIManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerStatusManager.cpp" />
+    <ClCompile Include="ResultUIManager.cpp" />
     <ClCompile Include="ScoreController.cpp" />
     <ClCompile Include="SetEnvironment.cpp" />
+    <ClCompile Include="StageData.cpp" />
+    <ClCompile Include="StageInfoUIManager.cpp" />
+    <ClCompile Include="StageManager.cpp" />
+    <ClCompile Include="StageProgressChecker.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -349,8 +357,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AstarPathFinding.hpp" />
+    <ClInclude Include="BattleState.hpp" />
     <ClInclude Include="CaptureEffect.hpp" />
-    <ClInclude Include="EnemyHitEffect.hpp" />
+    <ClInclude Include="CaptureItemData.hpp" />
+    <ClInclude Include="EnemyMoveType.hpp" />
+    <ClInclude Include="EnemySpawnEffect.hpp" />
+    <ClInclude Include="EnemyType.hpp" />
+    <ClInclude Include="InputUtility.hpp" />
+    <ClInclude Include="ItemInfo.hpp" />
+    <ClInclude Include="ResultType.hpp" />
+    <ClInclude Include="ResultUIManager.hpp" />
+    <ClInclude Include="Siv3dEvent.hpp" />
+    <ClInclude Include="BattleResultController.hpp" />
+    <ClInclude Include="PlayerHitEffect.hpp" />
     <ClInclude Include="ItemGetEffect.hpp" />
     <ClInclude Include="PlacementInventory.hpp" />
     <ClInclude Include="CaptureMouthItem.hpp" />
@@ -358,6 +377,7 @@
     <ClInclude Include="Enemy.hpp" />
     <ClInclude Include="EnemyManager.hpp" />
     <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="HelperUIManager.hpp" />
     <ClInclude Include="HitDetecter.hpp" />
     <ClInclude Include="HpUIManager.hpp" />
     <ClInclude Include="PlacementItemManager.hpp" />
@@ -367,6 +387,11 @@
     <ClInclude Include="PlayerStatusManager.hpp" />
     <ClInclude Include="ScoreController.hpp" />
     <ClInclude Include="SetEnvironment.hpp" />
+    <ClInclude Include="StageData.hpp" />
+    <ClInclude Include="StageEnemyInfo.hpp" />
+    <ClInclude Include="StageInfoUIManager.hpp" />
+    <ClInclude Include="StageManager.hpp" />
+    <ClInclude Include="StageProgressChecker.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

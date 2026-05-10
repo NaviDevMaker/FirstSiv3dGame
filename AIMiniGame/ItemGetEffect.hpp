@@ -1,10 +1,17 @@
 ﻿#include <Siv3D.hpp>
 
 //アイテム取得時のエフェクト
+//HSV{0}     // 赤
+//HSV{ 60 }    // 黄
+//HSV{ 120 }   // 緑
+//HSV{ 180 }   // 水色
+//HSV{ 240 }   // 青
+//HSV{ 300 }   // 紫
+
 struct  ItemGetEffect:IEffect
 {
 	static constexpr Vec2 Gravity{ 0, 160 };
-	static constexpr double baseHue{ 180 };
+	//static constexpr double baseHue{ 180 };
 
 	struct Star
 	{
@@ -15,7 +22,7 @@ struct  ItemGetEffect:IEffect
 
 	Array<Star> m_stars;
 
-	ItemGetEffect(const Vec2& pos)
+	ItemGetEffect(const Vec2& pos,double baseHue)
 	{
 		for (int32 i = 0; i < 6; ++i)
 		{

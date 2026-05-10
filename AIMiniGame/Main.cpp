@@ -7,9 +7,14 @@
 void Main()
 {
 	Scene::Resize(1920, 1080);
+	//全画面でも1920×1080は変わらない
+	//Scene::SetResizeMode(ResizeMode::Virtual);
 	Window::Resize(1280, 720);
+	//全画面にする
+	//Window::SetFullscreen(true);
 	GameManager gameManager;
 	Effect effect;
+	gameManager.Setup();
 	while (System::Update())
 	{
 		gameManager.Update(effect);

@@ -41,7 +41,9 @@ bool HitDetecter::DetectHitCheese(Array<Cheese>& cheeses, int& point,Effect& eff
 			point = cheese.point;
 			//removed_atとの違いに注意
 			cheeses.remove_at(i);
-			effect.add<ItemGetEffect>(player.pos);
+
+			const double yellow = 60.0;
+			effect.add<ItemGetEffect>(player.pos,yellow);
 			return true;
 		}
 	}
@@ -50,7 +52,7 @@ bool HitDetecter::DetectHitCheese(Array<Cheese>& cheeses, int& point,Effect& eff
 }
 
 //キャプチャアイテムに当たった時
-bool HitDetecter::DetectHitCaptureitem(Array<CaptureMouthItem>& captureItems) const
+bool HitDetecter::DetectHitCaptureitem(Array<CaptureMouthItem>& captureItems,Effect& effect) const
 {
 	if (captureItems.isEmpty()) return false;
 	for (int32 i = static_cast<int32>(captureItems.size()) - 1; i >= 0; i--)
@@ -59,6 +61,8 @@ bool HitDetecter::DetectHitCaptureitem(Array<CaptureMouthItem>& captureItems) co
 		if (player.hit.intersects(item.hit))
 		{
 			captureItems.remove_at(i);
+			const double blue = 240;
+			effect.add<ItemGetEffect>(player.pos,blue);
 			return true;
 		}
 	}

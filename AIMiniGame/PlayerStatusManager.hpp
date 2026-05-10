@@ -27,6 +27,7 @@ public:
 	void ActivateFlag(StatusType type);
 	bool GetActiveStatus(StatusType type);
 	void Update();
+	void Reset();
 private:
 	std::unordered_map<StatusType, Status> statusMap
 	{

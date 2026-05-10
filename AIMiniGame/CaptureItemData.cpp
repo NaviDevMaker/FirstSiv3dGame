@@ -14,3 +14,8 @@ void CaptureItemData::ReduceItemCount(int32 amount)
 {
 	captureItemCount -= amount;
 }
+
+void CaptureItemData::Reset()
+{
+	captureItemCount = 0;
+}

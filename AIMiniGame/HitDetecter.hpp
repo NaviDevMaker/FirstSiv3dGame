@@ -28,7 +28,7 @@ public:
 	HitDetecter(PlayerController& player);
 	bool DetectHitCheese(Array<Cheese>& cheeses,int& point,Effect& effect) const;
 	bool DetectHitEnemy(Array<Enemy>& enemys) const;
-	bool DetectHitCaptureitem(Array<CaptureMouthItem>& captureItems) const;
+	bool DetectHitCaptureitem(Array<CaptureMouthItem>& captureItems,Effect& effect) const;
 private:
 	PlayerController& player; //参照・ポインタなら中身いらない,PlayerController player; ならinclude必要
 };

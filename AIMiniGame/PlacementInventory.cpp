@@ -25,3 +25,8 @@ int32 PlacementInventory::GetCaptureItemCount() const
 {
 	return captureItemData.GetCaptureItemCount();
 }
+
+void PlacementInventory::Reset()
+{
+	captureItemData.Reset();
+}

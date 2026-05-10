@@ -7,7 +7,7 @@ void Cheese::RotateCheese()
 
 void Cheese::Draw()const
 {
-	cheeseCircle.draw(ColorF{ 1,0,0 });
+	cheeseCircle.draw(colorF);
 	looks.scaled(scale).rotated(angle).drawAt(spawnPos);
 }
 

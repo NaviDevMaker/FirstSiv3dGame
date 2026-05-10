@@ -4,7 +4,7 @@
 class AstarPathFinding
 {
 public:
-	Array<Vec2> FindPath(const Vec2& start, const Vec2& goal);
+	Array<Vec2> FindPath(const Vec2& start, const Vec2& goal,bool isDiagonal);
 private:
 	struct Node
 	{
@@ -25,8 +25,9 @@ private:
 		Node* parent = nullptr;
 	};
 
-	Array<Point> GetNeighbors(const Point& point) const;
+	Array<Point> GetNeighbors(const Point& point,bool isDiagonal) const;
 	double Heuristic(const Point& a, const Point& b) const;
 	Point ToGrid(const Vec2& pos) const;
 	Vec2 ToWorld(const Point& grid) const;
+	bool IsInsideGrid(const Point& grid) const;
 };

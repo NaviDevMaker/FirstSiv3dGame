@@ -11,22 +11,23 @@ void ItemManager::SpawnItems()
 void ItemManager::SpawnCheese()
 {
 	cheeseInfo.time += Scene::DeltaTime();
-	if (cheeseInfo.time < cheeseInfo.spawnTime) return;
+	if (cheeseInfo.time < cheeseInfo.spawnInterval) return;
 	cheeseInfo.time = 0;
 	double scale = GetRandomScale();
 	auto type = static_cast<AmountType>(scale * 2);
 	int amount = GetAmount(type);
+	ColorF color = GetCheeseColor(type);
 	Vec2 pos;
 	pos = GetRandomPos();
 	//Cheese newCheese{ U"🧀"_emoji,amount,scale,pos};
 	//std::move(newCheese);
-	cheeses << Cheese{ U"🧀"_emoji,amount,scale,pos };//newCheese;
+	cheeses << Cheese{ U"🧀"_emoji,amount,scale,pos,color};//newCheese;
 }
 
 void ItemManager::SpawnCaptureItem()
 {
 	captureItemInfo.time += Scene::DeltaTime();
-	if (captureItemInfo.time < captureItemInfo.spawnTime) return;
+	if (captureItemInfo.time < captureItemInfo.spawnInterval) return;
 	captureItemInfo.time = 0;
 	Vec2 pos;
 	pos = GetRandomPos();
@@ -35,8 +36,8 @@ void ItemManager::SpawnCaptureItem()
 
 Vec2 ItemManager::GetRandomPos() const
 {
-	double x = Random(minX, maxX);
-	double y = Random(minY, maxY);
+	const double x = Random(0.0, static_cast<double>(Scene::Width()));
+	const double y = Random(0.0, static_cast<double>(Scene::Height()));
 	Vec2 spawnPos{ x,y };
 	return spawnPos;
 }
@@ -61,6 +62,14 @@ int ItemManager::GetAmount(AmountType type) const
 	}
 	return 0;
 }
+
+ColorF ItemManager::GetCheeseColor(AmountType type) const
+{
+	auto it = colorMap.find(type);
+	if (it != colorMap.end()) return it->second;
+	return Palette::White;
+}
+
 //これがconstじゃないのはCheeseMovementの中のさらにその中の関数でCheeseの位置を変えてる、それはつまりcheeseの状態が変わってる、だからダメ
 void ItemManager::MoveItems()
 {
@@ -82,4 +91,16 @@ void ItemManager::Update()
 {
 	SpawnItems();
 	MoveItems();
+}
+
+void ItemManager::ApplyStageInfo(const ItemInfo& cheeseItemInfo, const ItemInfo& captureItemInfo)
+{
+	this->cheeseInfo = cheeseItemInfo;
+	this->captureItemInfo = captureItemInfo;
+}
+
+void ItemManager::Reset()
+{
+	cheeses.clear();
+	captureItems.clear();
 }

@@ -7,7 +7,8 @@ class PlayerController;
 class Enemy
 {
 public:
-	Enemy(int32 speed, ColorF colorF, Vec2 spawnPos, PlayerController& player);
+	Enemy(int32 speed, ColorF colorF, Vec2 spawnPos, PlayerController& player
+	      ,bool isDiagonal);
 		
    void	Update();
 private:
@@ -24,14 +25,15 @@ private:
 	//Vec2 previousPos;
 	Array<Vec2> path;
 	int pathIndex{ 0 };
-	static constexpr double chaseTime{ 0.05 };
-	double elapsedTime{0};
+	static constexpr double pathRefreshInterval{ 0.3 };
+	double pathElapsedTime{ pathRefreshInterval };
 
 	void Rotate(Vec2& nor);
 	int rlDir{ -1 };
 	double angle{0};
 	bool isMirror{ false };
 	bool isFliped{ false };
+	bool isDiagonal;
 public:
 	Circle hit;//当たり判定
 };
